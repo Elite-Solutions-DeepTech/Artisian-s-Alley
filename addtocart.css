@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;700&display=swap');
+
+*{
+  font-family: 'Nunito', sans-serif;
+  margin:0; padding:0;
+  box-sizing: border-box;
+  outline: none; border:none;
+  text-decoration: none;
+  text-transform: capitalize;
+}
+
+.container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  min-height: 100vh;
+  padding:10px 7%;
+  background: linear-gradient(90deg, #7DA6A8 100%, #eee 50.1%);
+}
+
+.container .product-container{
+  display: flex;
+  flex-wrap: wrap;
+  gap:15px;
+}
+
+.container .product-container .product{
+  flex:1 1 300px;
+  padding:20px;
+  border-radius: 5px;
+  background:#fff;
+  box-shadow: 0 5px 10px rgba(0,0,0,.3);
+  text-align: center;
+}
+
+.container .product-container .product img{
+  height: 180px;
+}
+
+.container .product-container .product h3{
+  font-size: 25px;
+  color:#666;
+}
+
+.container .product-container .product .amount{
+  padding:10px 0;
+  color:#7DA6A8;
+  font-weight: bolder;
+}
+
+.container .product-container .product .amount .dollar{
+  font-size: 20px;
+}
+
+.container .product-container .product .amount .price{
+  font-size: 35px;
+}
+
+.container .product-container .product .btn{
+  display: inline-block;
+  border-radius: 50px;
+  background:#333;
+  font-size: 17px;
+  color:#fff;
+  padding:8px 50px;
+  margin:8px 0;
+  transition: .2s ease-out;
+  font-weight: bolder;
+}
+
+.container .product-container .product .btn:hover{
+  opacity: .8;
+  letter-spacing: 2px;
+}
+
+.container .currency-toggler{
+  margin:15px 0;
+  display: flex;
+  align-items: center;
+  padding:20px;
+  border-radius: 5px;
+  background:#fff;
+  box-shadow: 0 5px 10px rgba(0,0,0,.3);
+}
+
+.container .currency-toggler span{
+  font-weight: bolder;
+  color:#666;
+  font-size: 20px;
+}
+
+.container .currency-toggler .toggler{
+  margin:0 10px;
+  height:50px;
+  width:150px;
+  border-radius: 50px;
+  background:#7DA6A8;
+  position: relative;
+  cursor: pointer;
+}
+
+.container .currency-toggler .toggler::before{
+  content: '';
+  position: absolute;
+  top:5px; left:7px;
+  height:40px;
+  width:40px;
+  background:#fff;
+  border-radius: 50%;
+  transition: .2s ease-out;
+}
+
+.container .currency-toggler .toggler.active::before{
+  left: calc(100% - 47px);
+}
+#cart-summary{
+    background-color: #7DA6A8;
+    color: white;
+
+}
+btn buy-now{
+    background-color: #7DA6A8;
+    color: white;
+    border-radius: 20px;
+}

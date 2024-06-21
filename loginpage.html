@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+    <title>Login Page</title>
+</head>
+<body>
+    <div class="video-container">
+        <video autoplay muted loop class="video-bg">
+            <source src="login.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="login-box">
+                <h2>Login</h2>
+                <form>
+                    <label for="email">
+                        <p style="text-align: left;">Enter your email:</p>
+                        <input type="text" id="email" placeholder="Enter your email id">
+                    </label>
+                    <label for="password">
+                        <p style="text-align: left;">Enter Password:</p>
+                        <input type="password" id="password" placeholder="Enter password">
+                    </label>
+                    <br>
+                    <br>
+                    <button type="button" onclick="goToPage3()">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function goToPage3() {
+            msg();
+            window.location.href = "index.html";
+        }
+        function goToLoginPage() {
+            msg();
+            window.location.href = "index.html";
+        }
+    </script>
+    
+    <script type="text/javascript">
+        function msg(){
+            alert("Welcome to ArtsCulture Hub")
+        }
+      </script>  
+</body>
+</html>
+
+
+

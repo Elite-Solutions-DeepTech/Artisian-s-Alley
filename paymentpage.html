@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <link rel="stylesheet" href="paymentpage.css">
+</head>
+<body>
+    <div class="payment-container">
+        <header class="payment-header">
+            <h1>Payment Method </h1>
+        </header>
+        <main class="payment-main">
+            <form class="payment-form" id="submit-to-google-sheet" action="/submit_payment" method="post">
+                <div class="form-group">
+                    <label for="buyer-name">Your Name</label>
+                    <input type="text" id="buyer-name" name="buyer-name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="buyer-email">Your Email</label>
+                    <input type="email" id="buyer-email" name="buyer-email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="card-number">Card Number</label>
+                    <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9012 3456" required>
+                </div>
+                <div class="form-group">
+                    <label for="card-expiry">Expiry Date</label>
+                    <input type="text" id="card-expiry" name="card-expiry" placeholder="MM/YY" required>
+                </div>
+                <div class="form-group">
+                    <label for="card-cvc">CVC</label>
+                    <input type="text" id="card-cvc" name="card-cvc" placeholder="CVC" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Purchase</button>
+                </div>
+            </form>
+        </main>
+    </div>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzAUA7mIdzaBvekkzZpgLZqNIgBZAztpYmI9-0uyPquJmQ-lKJxFVdPpo5OxnDei94z/exec'
+        const form = document.getElementById('submit-to-google-sheet');
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault();
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {console.log('Success!', response)
+                alert("Patyment successfully completed");
+                form.reset();
+            })
+            .catch(error => console.error('Error!', error.message));
+        });
+    </script>
+    
+</body>
+</html>

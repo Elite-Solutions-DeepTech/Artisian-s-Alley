@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add to Cart Example</title>
+    
+    <!-- Custom CSS file link  -->
+    <link rel="stylesheet" href="addtocart.css">
+
+</head>
+<body>
+    
+<div class="container">
+
+    <div class="currency-toggler">
+        <span>USD</span>
+        <div class="toggler"></div>
+        <span>INR</span>
+    </div>
+
+    <div class="product-container">
+
+        <div class="product">
+            <img src="art 1.jpg" alt="">
+            <h3>Nature</h3>
+            <div class="amount">
+                <span class="dollar">$</span>
+                <span class="price">300</span>
+            </div>
+            <a href="#" class="btn add-to-cart" data-name="Organic Banana" data-price="300">add to cart</a>
+        </div>
+        <div class="product">
+            <img src="art 2.jpeg" alt="">
+            <h3>Pleasant Place</h3>
+            <div class="amount">
+                <span class="dollar">$</span>
+                <span class="price">500</span>
+            </div>
+            <a href="#" class="btn add-to-cart" data-name="Organic Tomato" data-price="500">add to cart</a>
+        </div>
+        <div class="product">
+            <img src="image 3.png" alt="">
+            <h3>Women</h3>
+            <div class="amount">
+                <span class="dollar">$</span>
+                <span class="price">700</span>
+            </div>
+            <a href="#" class="btn add-to-cart" data-name="Organic Tomato" data-price="700">add to cart</a>
+        </div>
+        <div class="product">
+            <img src="image 4.avif" alt="">
+            <h3>Durga</h3>
+            <div class="amount">
+                <span class="dollar">$</span>
+                <span class="price">800</span>
+            </div>
+            <a href="#" class="btn add-to-cart" data-name="Organic Tomato" data-price="800">add to cart</a>
+        </div>
+        <div class="product">
+            <img src="art 5.jpeg" alt="">
+            <h3>Parenthood</h3>
+            <div class="amount">
+                <span class="dollar">$</span>
+                <span class="price">600</span>
+            </div>
+            <a href="#" class="btn add-to-cart" data-name="Organic Tomato" data-price="600">add to cart</a>
+        </div>
+        <div class="product">
+            <img src="image 6.png" alt="">
+            <h3>Eagle</h3>
+            <div class="amount">
+                <span class="dollar">$</span>
+                <span class="price">700</span>
+            </div>
+            <a href="#" class="btn add-to-cart" data-name="Organic Tomato" data-price="700">add to cart</a>
+        </div>
+        <div class="product">
+            <img src="Wooden-Sculptures-1.jpg" alt="">
+            <h3>Peacock</h3>
+            <div class="amount">
+                <span class="dollar">$</span>
+                <span class="price">200</span>
+            </div>
+            <a href="#" class="btn add-to-cart" data-name="Organic Tomato" data-price="200">add to cart</a>
+        </div>
+        <div class="product">
+            <img src="art 6.jpeg" alt="">
+            <h3>Sculpture</h3>
+            <div class="amount">
+                <span class="dollar">$</span>
+                <span class="price">250</span>
+            </div>
+            <a href="#" class="btn add-to-cart" data-name="Organic Tomato" data-price="250">add to cart</a>
+        </div>
+        
+
+    </div>
+
+    <div class="cart-summary">
+        <h2>Cart Summary</h2>
+        <div class="cart-items">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+        <div class="total-amount">
+            Total Amount: <span id="total-amount">$0.00</span>
+        </div>
+        <a href="paymentpage.html" class="btn buy-now">Buy Now</a>
+    </div>
+
+</div>
+
+<script>
+    let toggler = document.querySelector('.toggler');
+    let priceElements = document.querySelectorAll('.price');
+    let dollarElements = document.querySelectorAll('.dollar');
+    let addToCartButtons = document.querySelectorAll('.add-to-cart');
+    let usd = 72.72; // 1 dollar = 72.72 INR
+
+    // Initialize total amount and cart items array
+    let totalAmount = 0.00;
+    let cartItems = [];
+
+    // Toggler for currency conversion
+    toggler.onclick = () => {
+        toggler.classList.toggle('active');
+
+        if (toggler.classList.contains('active')) {
+            dollarElements.forEach((element) => {
+                element.innerText = '₹';
+            });
+            priceElements.forEach((element) => {
+                let priceInUSD = parseFloat(element.innerText);
+                element.innerText = (priceInUSD * usd).toFixed(2);
+            });
+            // Update total amount in INR
+            totalAmount *= usd;
+        } else {
+            dollarElements.forEach((element) => {
+                element.innerText = '$';
+            });
+            priceElements.forEach((element) => {
+                let priceInINR = parseFloat(element.innerText);
+                element.innerText = (priceInINR / usd).toFixed(2);
+            });
+            // Update total amount in USD
+            totalAmount /= usd;
+        }
+
+        // Update total amount displayed
+        updateTotalAmount();
+    };
+
+    // Add to cart functionality
+    addToCartButtons.forEach((button) => {
+        button.addEventListener('click', function() {
+            let itemName = this.getAttribute('data-name');
+            let price = parseFloat(this.getAttribute('data-price'));
+            totalAmount += price;
+            // Add item to cartItems array
+            cartItems.push({ name: itemName, price: price });
+            // Update cart summary
+            updateCartSummary();
+        });
+    });
+
+    // Function to update cart summary
+    function updateCartSummary() {
+        let cartItemsContainer = document.querySelector('.cart-items');
+        cartItemsContainer.innerHTML = ''; // Clear previous items
+        cartItems.forEach((item) => {
+            let itemElement = document.createElement('div');
+            itemElement.classList.add('cart-item');
+            itemElement.innerHTML = `${item.name}: $${item.price.toFixed(2)}`;
+            cartItemsContainer.appendChild(itemElement);
+        });
+        // Update total amount displayed
+        updateTotalAmount();
+    }
+
+    // Function to update total amount display
+    function updateTotalAmount() {
+        document.getElementById('total-amount').innerText = '$' + totalAmount.toFixed(2);
+    }
+
+    // Buy now button functionality (example: redirects to checkout page)
+    let buyNowButton = document.querySelector('.buy-now');
+    buyNowButton.addEventListener('click', function() {
+        // Example: Redirect to checkout page or handle checkout process
+        alert('Redirecting to checkout page...');
+        // You can add your own logic here to handle checkout process
+    });
+
+</script>
+
+</body>
+</html>
